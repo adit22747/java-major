@@ -1,4 +1,4 @@
-package com.example.service;
+package com.elearning.service;
 
 import java.util.List;
 import java.util.Optional;
