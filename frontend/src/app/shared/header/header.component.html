@@ -29,9 +29,8 @@
 					<!-- <li class="nav-item "><a class="nav-link mx-2 text-white "
 						aria-current="page" routerLink="/locked-notification"><i class="fas fa-unlock"></i><span class="badge rounded-pill badge-notification bg-danger myBadge">5</span></a>
 					</li> -->
-					<li class="nav-item "><a class="nav-link mx-2 text-white"  aria-current="page"
-							(click)="reg()" *ngIf="(userrole | async) === null" ><i
-								class="fas fa-sign-in-alt fa-lg"></i></a>
+					<li class="nav-item "><a class="nav-link mx-2 text-white" aria-current="page" (click)="reg()"
+							*ngIf="(userrole | async) === null"><i class="fas fa-sign-in-alt fa-lg"></i></a>
 					</li>
 					<li class="nav-item dropdown " *ngIf="(userrole | async) === 'admin'">
 						<a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button"

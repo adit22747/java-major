@@ -10,6 +10,8 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
+import { OoterComponent } from './ooter/ooter.component';
+import { FooterComponent } from './footer/footer.component';
 
 
 const routes: Routes = [
@@ -17,7 +19,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [ForgotPasswordComponent, HeaderComponent, IndexComponent, RegisterComponent],
+  declarations: [ForgotPasswordComponent, HeaderComponent, IndexComponent, RegisterComponent, OoterComponent, FooterComponent],
   imports: [
     CommonModule,
     FormsModule,
