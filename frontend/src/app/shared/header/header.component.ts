@@ -12,23 +12,23 @@ import { RegisterComponent } from '../register/register.component';
 })
 export class HeaderComponent implements OnInit {
 
-username: any
- userrole:Observable<String>
-  constructor(private as:AuthenticateService , private route:Router,public dialog: MatDialog) {
-    this.userrole=this.as.userrole
-   }
-
-  ngOnInit(): void {
-    this.username=sessionStorage.getItem("username")
+  username: any
+  userrole!: Observable<any>
+  constructor(private as: AuthenticateService, private route: Router, public dialog: MatDialog) {
+    this.userrole = this.as.userrole
   }
 
-  reg(){
-    this.dialog.open(RegisterComponent,{
+  ngOnInit(): void {
+    this.username = sessionStorage.getItem("username")
+  }
+
+  reg() {
+    this.dialog.open(RegisterComponent, {
       width: '800px',
     });
   }
 
-  logout(){
+  logout() {
     this.as.logout()
     this.route.navigate(["/"])
   }
