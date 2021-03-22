@@ -1,0 +1,66 @@
+package com.example.service;
+
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import java.util.Random;
+import java.util.stream.Collectors;
+
+import javax.mail.MessagingException;
+import javax.mail.internet.AddressException;
+import javax.servlet.http.HttpSession;
+import javax.transaction.Transactional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Service;
+
+import com.example.email.EmailUtil;
+import com.example.email.PdfMail;
+import com.example.entity.Category;
+import com.example.entity.Certificate;
+import com.example.entity.Comment;
+import com.example.entity.Course;
+import com.example.entity.EnrolledCourseVideo;
+import com.example.entity.EnrolledCourses;
+import com.example.entity.Feedback;
+import com.example.entity.Like;
+import com.example.entity.Profile;
+import com.example.entity.User;
+import com.example.entity.Video;
+import com.example.repositiories.Categoryrepo;
+import com.example.repositiories.CertiRepo;
+import com.example.repositiories.CommentRepo;
+import com.example.repositiories.CourseRepo;
+import com.example.repositiories.EnrolledCourseRepo;
+import com.example.repositiories.EnrolledCourseVideoRepo;
+import com.example.repositiories.FeedbackRepo;
+import com.example.repositiories.LikeRepo;
+import com.example.repositiories.ProfileRepo;
+import com.example.repositiories.UserRepo;
+import com.example.repositiories.VideoRepo;
+import com.itextpdf.text.BaseColor;
+import com.itextpdf.text.Chunk;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Element;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.FontFactory;
+import com.itextpdf.text.Image;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.Rectangle;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
+
+@Service
+public class UserServiceImpl implements UserService {
+
+	
+
+	
+
+}

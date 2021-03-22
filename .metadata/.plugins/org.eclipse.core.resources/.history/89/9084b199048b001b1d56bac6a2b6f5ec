@@ -1,0 +1,22 @@
+package com.example.service;
+
+import java.io.IOException;
+import java.sql.Date;
+import java.util.List;
+import java.util.Optional;
+
+import javax.mail.MessagingException;
+import javax.mail.internet.AddressException;
+import javax.servlet.http.HttpSession;
+
+import com.example.entity.Comment;
+import com.example.entity.Course;
+import com.example.entity.EnrolledCourses;
+import com.example.entity.Feedback;
+import com.example.entity.Profile;
+import com.example.entity.User;
+import com.example.entity.Video;
+
+public interface UserService {
+	
+}
