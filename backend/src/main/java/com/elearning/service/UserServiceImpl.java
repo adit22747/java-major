@@ -1,4 +1,4 @@
-package com.example.service;
+package com.elearning.service;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
