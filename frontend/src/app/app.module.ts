@@ -30,7 +30,7 @@ import { SafePipe } from './safe.pipe';
     ReactiveFormsModule,
     NoopAnimationsModule,
     MatButtonModule,
-   SharedModule,
+   SharedModule
   ],
   providers: [
 
