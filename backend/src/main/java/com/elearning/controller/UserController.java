@@ -27,6 +27,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 
+import com.elearning.entity.Comment;
 import com.elearning.service.UserService;
 import com.elearning.service.UserServiceImpl;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -40,6 +41,46 @@ import io.micrometer.core.ipc.http.HttpSender.Request;
 @CrossOrigin(origins = "http://localhost:4200", maxAge = 3600)
 public class UserController {
 
+	
+	@Autowired
+	UserService uservice = new UserServiceImpl();
+	
+	@PostMapping("/comment")
+	public ResponseEntity<String> postComment(@RequestParam int userid, @RequestParam int courseid,
+			@RequestParam String comment_msg) {
+		Comment count = uservice.addComment(userid, courseid, comment_msg);
+
+		if (count == null) {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Cannot add comment");
+		}
+		return ResponseEntity.status(HttpStatus.OK).body("comment added");
+
+	}
+	
+	@DeleteMapping("/comment")
+	public ResponseEntity<String> deleteComment(@RequestParam int commentid) {
+
+		uservice.deleteComment(commentid);
+		return null;
+
+	}
+
+	
+	@PutMapping("/comment")
+	public ResponseEntity<String> upateComment(@RequestParam int userid, @RequestParam int courseid,
+			@RequestParam int commentid, @RequestParam String comment_msg) {
+		Comment count = uservice.updateComment(userid, courseid, commentid, comment_msg);
+
+		if (count == null) {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Cannot add comment");
+		}
+		return ResponseEntity.status(HttpStatus.OK).body("comment added");
+	}
+	
+	@GetMapping("/comment")
+	public List<Comment> fetchComment(@RequestParam int courseid) {
+		return uservice.fetchComment(courseid);
+	}
 	
 
 
