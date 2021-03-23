@@ -97,6 +97,54 @@ public class AdminServiceImpl implements AdminService{
 		return cou.count();
 	}
 
+	@Override
+	public List<Category> getAllCategory() {
+		return cat.findAll();
+	}
+
+	@Override
+	public Optional<Category> getCategoryById(int id) {
+		return cat.findById(id);
+	}
+
+	@Override
+	public void deleteCategory(int id) {
+		cat.deleteById(id);
+
+	}
+
+	@Override
+	public List<Course> getAllCourse() {
+		return cou.findAll();
+	}
+
+	@Override
+	public Optional<Course> getCourseById(int id) {
+		return cou.findById(id);
+	}
+
+	@Override
+	public void deleteCourse(int i) {
+		cou.deleteById(i);
+
+	}
+
+	@Override
+	public List<Video> getAllVideo() {
+		return vr.findAll();
+	}
+
+	@Override
+	public Optional<Video> getVideoById(int id) {
+		return vr.findById(id);
+	}
+
+	@Override
+	public void deleteVideo(int i) {
+		vr.deleteById(i);
+
+	}
+
 	
 	
 
