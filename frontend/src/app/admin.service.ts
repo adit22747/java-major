@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 
 import { environment } from '../environments/environment.prod'
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
+
 
 
 @Injectable({
@@ -10,7 +11,15 @@ import { Observable } from 'rxjs';
 })
 export class AdminService {
 
-  constructor(private http: HttpClient) { }
+
+
+  len= new BehaviorSubject<any>(0)
+  lenupdate=this.len.asObservable()
+  userrole: any;
+  
+  constructor(private http: HttpClient) {
+    // this.http.get(environment.baseUserUrl);
+  }
 
   getCategories(): Observable<any> {
     console.log(environment.baseCategoryUrl)
@@ -25,6 +34,11 @@ export class AdminService {
   getCategoriesById(id: any): Observable<any>{
     return this.http.get<any>(environment.baseCategoryUrl+"/"+id);
   }
+
+  getCategoriesName(): Observable<any>{
+    return this.http.get<any>(environment.baseCategoryUrl+"/category-name");
+  }
+
   getCategoriesCount(): Observable<any> {
     console.log(environment.baseCategoryUrl)
     return this.http.get<any>(environment.baseCategoryUrl+"/total");
@@ -34,8 +48,8 @@ export class AdminService {
     return this.http.get<any>(environment.baseCourseUrl+"/total");
   }
   getUserCount(): Observable<any> {
-    console.log(environment.baseUserUrl)
-    return this.http.get<any>(environment.baseUserUrl+"/total");
+    console.log(environment.baseAdminUrl)
+    return this.http.get<any>(environment.baseAdminUrl+"/usercount");
   }
 
   addCategory(categoryName: any, categoryDesc: any, categoryLogo:any):Observable<any>{
@@ -92,22 +106,35 @@ export class AdminService {
   }
 
   getUsers(): Observable<any> {
-    console.log(environment.baseUserUrl)
-    return this.http.get<any>(environment.baseUserUrl);
+    console.log(environment.baseAdminUrl)
+    console.log("Inside service");
+    
+    return this.http.get<any>(environment.baseAdminUrl+"/user");
   }
 
   unlockUserById(userId:any){
     console.log(userId);
-    return this.http.put<any>(environment.baseUserUrl+"/unlockuser/"+userId, {userId})
+    return this.http.put<any>(environment.baseAdminUrl+"/unlockuser/"+userId, {userId})
   }
 
 
   getLockedUsers(): Observable<any>{
-    return this.http.get<any>(environment.baseUserUrl+"/lockedusers")
+    console.log(environment.baseAdminUrl+"/lockedusers");
+    return this.http.get<any>(environment.baseAdminUrl+"/lockedusers")
+    
+    
   }
  
+  getCourseState(): Observable<any> {
+    return this.http.get<any>(environment.baseCourseReportUrl)
+  }
 
+  updateCartSizeData(){
+    this.getLockedUsers().subscribe((data1) => {
+      this.len.next(data1.length)
+    })
 
+  }
 
+  }
 
-}
