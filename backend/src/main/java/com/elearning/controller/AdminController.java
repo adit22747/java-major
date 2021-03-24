@@ -35,7 +35,7 @@ public class AdminController {
 	public  ResponseEntity<Boolean> addCategory(@RequestBody Category c) {
 		boolean b= asi.addCategory(c);
 		 if(b==false) {
-			 throw new ResponseStatusException(HttpStatus.UNPROCESSABLE_ENTITY,"Category not addedd!!!");
+			 throw new ResponseStatusException(HttpStatus.UNPROCESSABLE_ENTITY,"Category is not addedd!!!");
 		 }
 		 else {
 			 return  ResponseEntity.status(HttpStatus.OK).body(b); 
