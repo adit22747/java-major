@@ -13,4 +13,9 @@ import javax.servlet.http.HttpSession;
 
 public interface UserService {
 	
+	public boolean like(int uid,int cid);
+	public boolean unlike(int likeid,int cid);
+	public boolean isliked(int cid,int uid);
+	public boolean Enroll(int cid,int uid);
+	
 }
