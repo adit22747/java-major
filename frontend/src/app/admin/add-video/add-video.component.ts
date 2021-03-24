@@ -20,7 +20,7 @@ export class AddVideoComponent implements OnInit {
 
     this.videoForm = new FormGroup({
       courseId: new FormControl('', [Validators.required]),
-     videoName: new FormControl('', [Validators.required, Validators.minLength(5)]),
+     videoName: new FormControl('', [Validators.required, Validators.minLength(4)]),
      videoDesc: new FormControl('', [Validators.required, Validators.minLength(10)]),
      videoPath:new FormControl('', [Validators.required])
   })
