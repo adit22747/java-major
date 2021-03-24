@@ -43,6 +43,13 @@ public interface AdminService {
 
 	public void deleteVideo(int i);
 
+	public List<User> getAllUser();
+
+	public List<User> getLockedAccount();
+
+	public boolean unlocakAccount(int uid);
+
+	public boolean lockAccount(int uid);
 
 	
 }
