@@ -160,34 +160,16 @@ class AdminServiceImplMockTest {
 		List<Comment> comment = null;
 		List<Course> courseList1= new ArrayList<Course>();
 		List<Course> courseList = new ArrayList<Course>();
-		
-		
-		Category cat1 = new Category(51,"Testing", "description of category", "abc.jpeg", courseList);;
-		courseList1.add(new Course(12,"java", "description of Course", "abc.jpeg", 5000, 3, cat1, comment, 0, 0, 0, 0, 0));
-		courseList1.add(new Course(13,"Testing", "description of Course", "abc.jpeg", 5000, 3, cat1, comment, 0, 0, 0, 0, 0));
-		courseList1.add(new Course(15,"Security", "description of Course", "abc.jpeg", 5000, 3, cat1, comment, 0, 0, 0, 0, 0));
-		Category cat = new Category(51, "Testing", "description of category", "abc.jpeg", courseList1);
-		
+	
+		Category cat = new Category(51,"Testing", "description of category", "abc.jpeg", courseList);
 		
 		courseList.add(new Course(12,"java", "description of Course", "abc.jpeg", 5000, 3, cat, comment, 0, 0, 0, 0, 0));
 		courseList.add(new Course(13,"Testing", "description of Course", "abc.jpeg", 5000, 3, cat, comment, 0, 0, 0, 0, 0));
 		courseList.add(new Course(15,"Security", "description of Course", "abc.jpeg", 5000, 3, cat, comment, 0, 0, 0, 0, 0));
-		
-		Category categoryObj = new Category(51,"Testing", "description of category", "abc.jpeg", courseList);
+//		Category categoryObj = new Category(51,"Testing", "description of category", "abc.jpeg", courseList);
+//		
+//		System.out.println(categoryObj.getCategoryId());
 //		System.out.println(categoryObj.getCourses());
-	
-//		Category categoryObj = null;
-		//Category cat = new Category(51, "Testing", "description of category", "abc.jpeg", courseList);
-		
-//		categoryObj=new  Category(51,"Testing", "description of category", "abc.jpeg", courseList);
-//		courseList.add(new Course(12,"java", "description of Course", "abc.jpeg", 5000, 3, categoryObj, comment, 0, 0, 0, 0, 0));
-//		courseList.add(new Course(13,"Testing", "description of Course", "abc.jpeg", 5000, 3, categoryObj, comment, 0, 0, 0, 0, 0));
-//		courseList.add(new Course(15,"Security", "description of Course", "abc.jpeg", 5000, 3, categoryObj, comment, 0, 0, 0, 0, 0));
-//		System.out.println(courseList.size());
-//		cat=categoryObj;
-		
-//		System.out.println(cat.getCategoryId());
-//		System.out.println(cat.getCourses());
 		
 		Course course = new Course("security", "description of Course", "abc.jpeg", 5000, 3);
 		when(courseRepo.save(course)).thenReturn(course);
@@ -237,7 +219,6 @@ class AdminServiceImplMockTest {
 		video.add(new Video(103, "test video 3", "test video desc", "abc.jpeg", course));
 		
 		when(videoRepo.findAll()).thenReturn(video);
-		
 		List<Video> result = as.getAllVideo();
 		assertEquals(3, result.size());
 	}
@@ -278,45 +259,5 @@ class AdminServiceImplMockTest {
 		as.deleteVideo(20);
         verify(videoRepo, times(1)).deleteById(20);
 	}
-//
-//	@Test
-//	void testGetCategoryCount() {
-//		fail("Not yet implemented");
-//	}
-
-//	@Test
-//	void testGetCourseCount() {
-//		fail("Not yet implemented");
-//	}
-//
-//	@Test
-//	void testGetVideoCount() {
-//		fail("Not yet implemented");
-//	}
-//
-//	@Test
-//	void testLockAccount() {
-//		fail("Not yet implemented");
-//	}
-//
-//	@Test
-//	void testUnlocakAccount() {
-//		fail("Not yet implemented");
-//	}
-//
-//	@Test
-//	void testGetLockedAccount() {
-//		fail("Not yet implemented");
-//	}
-//
-//	@Test
-//	void testGetAllUser() {
-//		fail("Not yet implemented");
-//	}
-//
-//	@Test
-//	void testGetUserCount() {
-//		fail("Not yet implemented");
-//	}
 
 }
