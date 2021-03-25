@@ -1,5 +1,5 @@
-package com.elearning.entity;
 
+package com.elearning.entity;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -77,9 +77,4 @@ public class EnrolledCourseVideo {
 	public void setVideo(Video video) {
 		this.video = video;
 	}
-
-
-	
-	
-	
 }

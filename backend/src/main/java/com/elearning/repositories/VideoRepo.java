@@ -1,10 +1,7 @@
 package com.example.repositiories;
-
 import java.util.List;
-
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-
 import com.example.entity.Course;
 import com.example.entity.Video;
 
@@ -13,5 +10,4 @@ public interface VideoRepo extends JpaRepository<Video, Integer> {
 	List<Video> getVideo(int uid,int cid);
 
 	List<Video> findAllByCourse(Course course);
-
 }
