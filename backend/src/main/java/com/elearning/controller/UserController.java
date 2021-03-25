@@ -39,6 +39,31 @@ import io.micrometer.core.ipc.http.HttpSender.Request;
 @RequestMapping("/users")
 @CrossOrigin(origins = "http://localhost:4200", maxAge = 3600)
 public class UserController {
+	
+	
+	@Autowired
+	UserService uservice;
+	
+	@PutMapping(path="/{cid}")
+	public String like(@PathVariable int cid) {
+		
+		//11 is the user id
+		boolean status=uservice.like(4, cid);
+		if(status) {
+			return "Liked";
+		}
+		return "can not like";
+	}
+	@DeleteMapping(path="/{likeid}/{cid}")
+	public String unlike(@PathVariable int likeid,@PathVariable int cid) {
+		
+		//11 is the user id
+		boolean status=uservice.unlike(likeid,cid);
+		if(status) {
+			return "Un Liked";
+		}
+		return "can not unlike";	}
+
 
 	
 
