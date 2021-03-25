@@ -1,5 +1,5 @@
-package com.example.entity;
 
+package com.elearning.entity;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -22,7 +22,7 @@ public class EnrolledCourseVideo {
 	@JoinColumn(name="ecourseId", referencedColumnName = "ecourseId")
 	private EnrolledCourses ec;
 	
-	@ManyToOne(targetEntity = Video.class,cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@ManyToOne(targetEntity = Video.class, fetch = FetchType.LAZY)
 	@JoinColumn(name="videoId", referencedColumnName = "videoId")
 	private Video video;
 
@@ -77,9 +77,4 @@ public class EnrolledCourseVideo {
 	public void setVideo(Video video) {
 		this.video = video;
 	}
-
-	
-	
-	
-	
 }

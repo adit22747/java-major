@@ -18,46 +18,83 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.elearning.entity.Course;
-import com.elearning.entity.Like;
-import com.elearning.repositories.CourseRepo;
-import com.elearning.repositories.LikeRepo;
-import com.elearning.repositories.UserRepo;
-import com.elearning.repositories.VideoRepo;
-import com.elearning.entity.Video;
-import com.elearning.entity.EnrolledCourseVideo;
-import com.elearning.entity.User;
+	@Autowired
+	CommentRepo comr;
+    
+   @Autowired
+	LikeRepo lr;
 
-		
-@Service
-public class UserServiceImpl implements UserService {
-	
+	@Autowired
+	UserRepo ur;
+
+	@Autowired
+	CourseRepo cr;
+
+	@Autowired
+	EnrolledCourseRepo ecr;
+
+	@Autowired
+	FeedbackRepo fr;
+
+	@Autowired
+	VideoRepo vr;
 
 	@Autowired
 	LikeRepo lr;
-	@Autowired 
-	UserRepo ur;
-	@Autowired
-	CourseRepo cr;
-	@Autowired
-	VideoRepo vr;
-	
-	@Override
-	public boolean like(int uid, int cid) {
-		
-		Optional<Course> c=cr.findById(cid);
-		Optional<User> u=ur.findById(uid);
-		Like IfLike = lr.findByCourseAndUser(c.get(), u.get());
-		if(IfLike==null) {
-			Like like=new Like(c.get(),u.get());
-			int likes=c.get().getLikes();c.get().setLikes(++likes);
-			cr.save(c.get());
-			lr.save(like);
-			return true;
-		}
-		
-		return false;
 
+	@Autowired
+	EnrolledCourseVideoRepo ecvr;
+
+	@Autowired
+	ProfileRepo pfr;
+	
+	@Autowired
+	CertiRepo ctr;
+	
+	@Autowired
+	Categoryrepo catr;
+
+	@Override
+	public Comment addComment(int userID, int courseID, String msg) {
+
+		Optional<User> userD = ur.findById(userID);
+
+		Optional<Course> courseD = cr.findById(courseID);
+		if (ecr.findAllByUserAndCourse(userD.get(), courseD.get()).size() == 1) {
+			Comment comment = new Comment(msg);
+			comment.setUser(userD.get());
+			comment.setCourse(courseD.get());
+			return comr.save(comment);
+		}
+		return null;
+	}
+
+	@Override
+	public boolean deleteComment(int commentid) {
+		// TODO Auto-generated method stub
+		comr.deleteById(commentid);
+		return true;
+	}
+
+	@Override
+	public Comment updateComment(int userid, int courseid, int commentid, String comment_msg) {
+		Optional<User> userD = ur.findById(userid);
+
+		Optional<Course> courseD = cr.findById(courseid);
+		if (ecr.findAllByUserAndCourse(userD.get(), courseD.get()).size() == 1) {
+			Comment comment = new Comment(commentid, comment_msg);
+			comment.setUser(userD.get());
+			comment.setCourse(courseD.get());
+			return comr.save(comment);
+		}
+		return null;
+	}
+
+	@Override
+	public List<Comment> fetchComment(int id) {
+		List<Comment> comments = comr.fetchComment(id);
+		return comments;
+	}
 
 	}
 
@@ -100,11 +137,24 @@ public class UserServiceImpl implements UserService {
 			for (Video video : videos) {
 				EnrolledCourseVideo ecv=new EnrolledCourseVideo(0,false, video, null);
 				ecvideos.add(ecv);
-				
-				
-			
 	}
 			return true;}}
+
+@Override
+	public boolean like(int uid, int cid) {
+		
+		Optional<Course> c=cr.findById(cid);
+		Optional<User> u=ur.findById(uid);
+		Like IfLike = lr.findByCourseAndUser(c.get(), u.get());
+		if(IfLike==null) {
+			Like like=new Like(c.get(),u.get());
+			int likes=c.get().getLikes();c.get().setLikes(++likes);
+			cr.save(c.get());
+			lr.save(like);
+			return true;
+		}
+		
+		return false;
 	
 
 	

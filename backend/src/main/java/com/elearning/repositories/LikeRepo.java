@@ -1,17 +1,11 @@
-package com.elearning.repositories;
 
+package com.example.repositiories;
 import java.util.List;
-
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-
-import com.elearning.entity.Course;
-import com.elearning.entity.Like;
-import com.elearning.entity.User;
-
-
-
-
+import com.example.entity.Course;
+import com.example.entity.Like;
+import com.example.entity.User;
 
 public interface LikeRepo extends JpaRepository<Like, Integer>{
 	public Like findByCourseAndUser(Course c,User u);
