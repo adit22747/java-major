@@ -14,6 +14,13 @@ import { EditVideoComponent } from './edit-video/edit-video.component';
 import { LockedUserNotificationComponent } from './locked-user-notification/locked-user-notification.component';
 import { UserLogComponent } from './user-log/user-log.component';
 import { ReportsComponent } from './reports/reports.component';
+import { ViewUserComponent } from './view-user/view-user.component';
+import { BarChartComponent } from './bar-chart/bar-chart.component';
+import { CommentChartComponent } from './comment-chart/comment-chart.component';
+import { PieChartComponent } from './pie-chart/pie-chart.component';
+import { LineChartComponent } from './line-chart/line-chart.component';
+import { VideoChartComponent } from './video-chart/video-chart.component';
+import { DialogBoxComponent } from './dialog-box/dialog-box.component';
 
 const AdminComponents = [
   AddCategoryComponent,
@@ -27,11 +34,18 @@ const AdminComponents = [
   EditVideoComponent,
   UserLogComponent,
   LockedUserNotificationComponent,
-  ReportsComponent
+  ReportsComponent,
+  ViewUserComponent,
+  BarChartComponent,
+  CommentChartComponent,
+  LineChartComponent,
+  PieChartComponent,
+  VideoChartComponent,
+  DialogBoxComponent
 ]
 
 @NgModule({
-  declarations: [AdminDashboardComponent, AddCategoryComponent, AddCourseComponent, AddVideoComponent, ViewVideoComponent, ViewCategoryComponent, ViewCourseComponent, AdminSidebarComponent, EditCategoryComponent, EditCourseComponent, EditVideoComponent, LockedUserNotificationComponent, UserLogComponent, ReportsComponent],
+  declarations: [AdminDashboardComponent, AddCategoryComponent, AddCourseComponent, AddVideoComponent, ViewVideoComponent, ViewCategoryComponent, ViewCourseComponent, AdminSidebarComponent, EditCategoryComponent, EditCourseComponent, EditVideoComponent, LockedUserNotificationComponent, UserLogComponent, ReportsComponent, ViewUserComponent, BarChartComponent, CommentChartComponent, PieChartComponent, LineChartComponent, VideoChartComponent, DialogBoxComponent],
   imports: [
     CommonModule,
     AdminComponents
