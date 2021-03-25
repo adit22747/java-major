@@ -20,7 +20,7 @@ export class AddCourseComponent implements OnInit {
 
     this.courseForm = new FormGroup({
       categoryId: new FormControl('', [Validators.required]),
-      courseName: new FormControl('', [Validators.required, Validators.minLength(5)]),
+      courseName: new FormControl('', [Validators.required, Validators.minLength(4)]),
       courseDesc: new FormControl('', [Validators.required, Validators.minLength(10)]),
       courseLogo:new FormControl('', [Validators.required]),
       coursePrice: new FormControl('', [Validators.required, Validators.minLength(3)]),

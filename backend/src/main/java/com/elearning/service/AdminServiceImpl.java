@@ -145,6 +145,31 @@ public class AdminServiceImpl implements AdminService{
 
 	}
 
+		@Override
+	public boolean lockAccount(int uid) {
+		Optional<User> user = ur.findById(uid);
+		user.get().setLocked(true);
+		ur.save(user.get());
+		return true;
+	}
+
+	@Override
+	public boolean unlocakAccount(int uid) {
+		Optional<User> user = ur.findById(uid);
+		user.get().setLocked(false);
+		ur.save(user.get());
+		return true;
+	}
+
+	@Override
+	public List<User> getLockedAccount() {
+		return ur.getLockedUsers();
+	}
+
+	@Override
+	public List<User> getAllUser() {
+		return ur.findAll();
+	}
 	
 	
 

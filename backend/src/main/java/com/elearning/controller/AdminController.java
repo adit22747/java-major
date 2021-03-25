@@ -35,7 +35,7 @@ public class AdminController {
 	public  ResponseEntity<Boolean> addCategory(@RequestBody Category c) {
 		boolean b= asi.addCategory(c);
 		 if(b==false) {
-			 throw new ResponseStatusException(HttpStatus.UNPROCESSABLE_ENTITY,"Category not addedd!!!");
+			 throw new ResponseStatusException(HttpStatus.UNPROCESSABLE_ENTITY,"Category is not addedd!!!");
 		 }
 		 else {
 			 return  ResponseEntity.status(HttpStatus.OK).body(b); 
@@ -302,7 +302,63 @@ public class AdminController {
 		}
 	}
 	
+	//show all users
+	@GetMapping("/user")
+	public ResponseEntity<List<User>> AllUsers() {
+
+		List<User> li = asi.getAllUser();
+		if(li.size()==0) {
+			throw new ResponseStatusException(HttpStatus.OK,"No user found!!!");
+			}
+			else{
+				return ResponseEntity.status(HttpStatus.OK).body(li);
+			}
+		
+	}
+
+	//show locked users
+	@GetMapping(path="/user/lockedusers")
+	public ResponseEntity<List<User>> getLocked(){
+		
+		List<User>userList=asi.getLockedAccount();
+		 
+		if(userList.size()==0) {
+			throw new ResponseStatusException(HttpStatus.NO_CONTENT,"No locked user found!!!");
+		}
+		else{
+			
+			return ResponseEntity.status(HttpStatus.OK).body(userList);
+		
+		}
+	}
 	
+	//unlock the user
+	@PutMapping(path="/user/unlockuser/{u_id}")
+	public ResponseEntity<Boolean> unlock(@PathVariable int u_id){
+		boolean b=asi.unlocakAccount(u_id); 
+		 if(b==false) {
+			 throw new ResponseStatusException(HttpStatus.UNPROCESSABLE_ENTITY,"User not unlocked!!!");
+		 }
+		 else {
+			 return  ResponseEntity.status(HttpStatus.OK).body(b); 
+		 }
+		 
+	}
+	
+	//lock the user
+	@PutMapping(path="/user/lockuser/{u_id}")
+	public ResponseEntity<Boolean> lock(@PathVariable int u_id){
+		boolean b= asi.lockAccount(u_id);
+		 if(b==false) {
+			 throw new ResponseStatusException(HttpStatus.UNPROCESSABLE_ENTITY,"User not locked!!!");
+		 }
+		 else {
+			 return  ResponseEntity.status(HttpStatus.OK).body(b); 
+		 }
+		
+		
+	}
+
 	
 	
 	
