@@ -30,43 +30,51 @@
 <!-- <div [ngStyle]="{'color':employee.country === 'India' ? 'orange' : 'red' }"></<div> -->
 <hr>
 <div class="container" *ngIf="regshow">
+    <div class="text-center"><em class="text-danger">All fields are mandatory</em></div>
     <form [formGroup]="registerForm">
-        <div class="row mb-4">
+        <div class="row mb-4 ">
             <div class="col-lg-1"></div>
-            <div class="col-lg-2">
-                Username:
-            </div>
-            <div class="col-lg-8">
-                <input type="text" formControlName="username" class="form-control">
+
+            <div class="col-lg-10">
+                <mat-form-field class="col-12" appearance="outline">
+                    <input type="text" matInput formControlName="username"
+                        onkeyup="if (/[^|a-z0-9]+/g.test(this.value)) this.value = this.value.replace(/[^|a-z0-9]+/g,'')"
+                        placeholder="Enter username">
+                </mat-form-field>
                 <div *ngIf="registerForm.controls.username?.invalid && registerForm.controls.username?.touched">
-                    <p class="err-txt"><code>Enter minimum 5 characters</code></p>
+                    <p class="err-txt"><em>Enter minimum 5 characters</em></p>
                 </div>
             </div>
             <div class="col-lg-1"></div>
         </div>
         <div class="row  mb-4">
             <div class="col-lg-1"></div>
-            <div class="col-lg-2">
-                Email:
-            </div>
-            <div class="col-lg-8">
-                <input type="text" formControlName="email" required class="form-control">
+            <div class="col-lg-10">
+                <mat-form-field class="col-12" appearance="outline">
+                    <input type="email" matInput  formControlName="email" required placeholder="Enter mail">
+                </mat-form-field>
                 <div *ngIf="registerForm.controls.email?.invalid && registerForm.controls.email?.touched">
-                    <p class="err-txt"><code>Enter valid email</code></p>
+                    <p class="err-txt"><em>Enter valid email</em></p>
                 </div>
             </div>
             <div class="col-lg-1"></div>
         </div>
         <div class="row mb-4">
             <div class="col-lg-1"></div>
-            <div class="col-lg-2">
-                Password:
-            </div>
-            <div class="col-lg-8">
-                <input type="password" formControlName="password" class="form-control">
+            <div class="col-lg-10">
+                
+                <!-- <input type="password" formControlName="password" > -->
+                <mat-form-field class="col-12" appearance="outline">
+                    <input matInput [type]="hide ? 'text' : 'password'" formControlName="password"
+                        placeholder="Password">
+                    <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                        [attr.aria-pressed]="hide">
+                        <mat-icon>{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+                    </button>
+                </mat-form-field>
                 <div *ngIf="registerForm.controls.password?.invalid && registerForm.controls.password?.touched">
                     <p class="err-txt">
-                        <code>Enter min 1 digit,uppercase,lowercase and min length 6 and max length 10</code>
+                        <em>Enter min 1 digit,uppercase,lowercase and min length 6 and max length 10</em>
                     </p>
                 </div>
             </div>
@@ -75,7 +83,8 @@
         <div class="row mb-4">
             <div class="col-lg-1"></div>
             <div class="col-lg-10 d-grid gap-2">
-                <button type="submit" class="btn myBtn" (click)="registeruser()">Register</button>
+                <button type="submit" class="btn myBtn" (click)="registeruser()"
+                    [disabled]='registerForm.invalid'>Register</button>
             </div>
             <div class="col-lg-1"></div>
         </div>
@@ -101,7 +110,7 @@
             <div class="col-lg-1">
             </div>
             <div class="col-lg-10">
-                <p *ngIf="!isLocked" class="text-center"><em>Your Account Will Get locked On 3 Failed Login
+                <p *ngIf="!isLocked" class="text-center"><em class="text-warning">Your Account Will Get locked On 3 Failed Login
                         Attempts</em></p>
             </div>
             <div class="col-lg-1">
@@ -110,32 +119,41 @@
         <div class="row mb-4">
             <div class="col-lg-1">
             </div>
-            <div class="col-lg-2">
-                Username:
-            </div>
-            <div class="col-lg-8">
-                <input type="text" formControlName="username" class="form-control">
+
+            <div class="col-lg-10">
+
+                <mat-form-field class="col-12" appearance="outline">
+                    <input matInput type="text" formControlName="username" placeholder="Username" onkeyup="if (/[^|a-z0-9]+/g.test(this.value)) this.value = this.value.replace(/[^|a-z0-9]+/g,'')">
+                </mat-form-field>
             </div>
             <div class="col-lg-1">
             </div>
         </div>
+
         <div class="row mb-4">
             <div class="col-lg-1">
             </div>
-            <div class="col-lg-2">
-                Password:
-            </div>
-            <div class="col-lg-8">
-                <input type="password" formControlName="password" class="form-control">
+            <div class="col-lg-10">
+                <!-- <input type="password" formControlName="password" > -->
+                <mat-form-field class="col-12" appearance="outline">
+                    <input matInput [type]="hide ? 'text' : 'password'" formControlName="password"
+                        placeholder="Password">
+                    <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                        [attr.aria-pressed]="hide">
+                        <mat-icon>{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+                    </button>
+                </mat-form-field>
             </div>
             <div class="col-lg-1">
             </div>
         </div>
+
         <div class="row mb-4">
             <div class="col-lg-1">
             </div>
             <div class="col-lg-10 d-grid gap-2">
-                <button type="submit" class="btn myBtn" value="Login" (click)="loginuser()">Login</button>
+                <button type="submit" class="btn myBtn" value="Login" (click)="loginuser()"
+                    [disabled]='loginForm.invalid'>Login</button>
             </div>
             <div class="col-lg-1">
             </div>
@@ -205,9 +223,11 @@
         <div class="row mb-4" *ngIf="fields">
             <div class="col-lg-5">
                 <input type="password" class="form-control" formControlName="password" placeholder="Enter new password">
+               
             </div>
             <div class="col-lg-5">
                 <input type="password" class="form-control" formControlName="cpassword" placeholder="Confirm password">
+              
             </div>
             <div class="col-lg-2">
                 <button type="submit" class="btn myBtn float-end" (click)="submit()">Submit</button>
@@ -218,7 +238,7 @@
             <div class="col-lg-4">
             </div>
             <div class="col-lg-8">
-                <div class="err-txt"><code>Password does not match</code></div>
+                <div class="err-txt"><em>Password does not match</em></div>
             </div>
         </div>
     </form>
