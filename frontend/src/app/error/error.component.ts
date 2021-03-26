@@ -10,6 +10,7 @@ export class ErrorComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+  this.as.logout();
   }
 
 }
