@@ -176,7 +176,7 @@ public class AdminController {
 	public ResponseEntity<List<Category>> AllCategory() {
 		List<Category> li = asi.getAllCategory();
 		if (li.size() == 0) {
-			throw new ResponseStatusException(HttpStatus.NO_CONTENT, "No category found!!!");
+			throw new ResponseStatusException(HttpStatus.NO_CONTENT, "No category found!!!!");
 		} else {
 			return ResponseEntity.status(HttpStatus.OK).body(li);
 
