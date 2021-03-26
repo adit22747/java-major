@@ -82,6 +82,42 @@ public class UserController {
 		return uservice.fetchComment(courseid);
 	}
 	
+	@PostMapping("/feedback")
+	public ResponseEntity<String> postfeedback(@RequestParam int userid, @RequestParam int courseid,
+			@RequestParam String feedback_msg, @RequestParam int rating) {
+		Feedback count = uservice.addFeedback(userid, courseid, feedback_msg, rating);
+
+		if (count == null) {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Cannot add feedback");
+		}
+		return ResponseEntity.status(HttpStatus.OK).body("feedback added");
+
+	}
+	
+	@DeleteMapping("/feedback")
+	public ResponseEntity<String> deletefeedback(@RequestParam int feedbackid) {
+
+		uservice.deleteFeedback(feedbackid);
+		return null;
+
+	}
+	
+	@PutMapping("/feedback")
+	public ResponseEntity<String> upatefeedback(@RequestParam int userid, @RequestParam int courseid,
+			@RequestParam int feedbackid, @RequestParam String feedback_msg) {
+		Feedback count = uservice.updateFeedback(userid, courseid, feedbackid, feedback_msg);
+
+		if (count == null) {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Cannot add feedback");
+		}
+		return ResponseEntity.status(HttpStatus.OK).body("feedback added");
+	}
+	
+	@GetMapping("/feedback")
+	public List<Feedback> fetchFeedbackbyCourseID(@RequestParam int courseid) {
+		return uservice.fetchFeedbacks(courseid);
+	}
+	
 
 
 }
