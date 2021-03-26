@@ -45,7 +45,8 @@ a{
     background-color: $theme-color;
     color: white;
   }
-  .myBtn:hover{
+.myBtn:hover{
     background-color: lighten($theme-color, 5);
     color: white;
-  }
+}
+

@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { AuthenticateService } from 'src/app/authenticate.service';
 import { UserService } from 'src/app/user.service';
 import { AlertmodelComponent } from 'src/app/usermodule/alertmodel/alertmodel.component';
+import { ChangedPasswordLoginComponent } from '../changed-password-login/changed-password-login.component';
 
 @Component({
   selector: 'app-register',
@@ -12,6 +13,8 @@ import { AlertmodelComponent } from 'src/app/usermodule/alertmodel/alertmodel.co
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit {
+
+  
 
   constructor(private uservice: UserService, private router: Router, private as: AuthenticateService, public dialogRef: MatDialogRef<RegisterComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,private formbuilder:FormBuilder,public dialog: MatDialog) { }
@@ -25,8 +28,8 @@ export class RegisterComponent implements OnInit {
     })
 
     this.loginForm = new FormGroup({
-      username: new FormControl("adit7"),
-      password: new FormControl("Aditpatel1")
+      username: new FormControl("hemankshii"),
+      password: new FormControl("Java123")
 
     })
 
@@ -44,8 +47,8 @@ export class RegisterComponent implements OnInit {
   wpassword
   wusername
   failedattempts
-  regshow = true
-  loginshow = false
+  regshow = false
+  loginshow = true
   forgotshow = false
   registerForm: FormGroup
   loginForm: FormGroup
@@ -58,8 +61,6 @@ export class RegisterComponent implements OnInit {
   match = true
   matchpassword = true
   resendotp
-
-
   timeLeft: number = 30;
   interval;
 
@@ -117,6 +118,9 @@ export class RegisterComponent implements OnInit {
       }
 
     })
+    this.dialog.open(RegisterComponent,{
+      width: '800px',
+    });
 
 
   }
@@ -145,9 +149,9 @@ export class RegisterComponent implements OnInit {
              if(data.role==="user"){
                this.router.navigate(["/user"])
              }
-            // if(data.roles[0]==="ROLE_ADMIN"){
-            //   this.router.navigate(["/admin"])
-            // }
+            if(data.role==="admin"){
+              this.router.navigate(["/admin"])
+            }
           },
           (err)=>{
             this.as.incrementfailedattempt(this.loginForm.value.username).subscribe((data)=>{
@@ -184,28 +188,22 @@ export class RegisterComponent implements OnInit {
     this.loginshow=false
   }
   starttimer(){
-    this.uservice.checkEmail(this.forgotform.value.email).subscribe((x)=>{
-      if(x){
-        this.interval = setInterval(() => {
-          if(this.timeLeft===0){
-            this.resendotp=true
-            //this.timeLeft=30;
-            clearInterval(this.interval);
-          }
-          if(this.timeLeft > 0) {
-            
-            this.timeLeft--;
-          }
-          // } else {
-          //  
-          //  // this.resendotp=false
-          // }
-        },1000)
-        this.otp()
-
+    this.interval = setInterval(() => {
+      if(this.timeLeft===0){
+        this.resendotp=true
+        //this.timeLeft=30;
+        clearInterval(this.interval);
       }
-    })
-   
+      if(this.timeLeft > 0) {
+        
+        this.timeLeft--;
+      }
+      // } else {
+      //  
+      //  // this.resendotp=false
+      // }
+    },1000)
+    this.otp()
 
   }
 
@@ -220,6 +218,7 @@ export class RegisterComponent implements OnInit {
     this.fields=false
     this.uservice.forgotopt(this.forgotform.value.email).subscribe((x)=>{
       sessionStorage.setItem("value",btoa(x.toString()))
+
     })
 
       }
@@ -229,6 +228,8 @@ export class RegisterComponent implements OnInit {
 
   verifyotp(){
     if(this.forgotform.value.otp===atob(sessionStorage.getItem("value"))){
+      
+      
       this.fields=true
       this.match=true
     }
@@ -243,7 +244,10 @@ export class RegisterComponent implements OnInit {
         console.log("password changed")
         this.matchpassword=true
         this.dialogRef.close();
-        // this.router.navigate(['/login'])
+        this.dialog.open(ChangedPasswordLoginComponent,{
+          width: '800px',
+        });
+        
       })
     }
     else{
