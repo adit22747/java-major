@@ -33,7 +33,7 @@ export class EditCategoryComponent implements OnInit {
       console.log(this.categoryById.categoryDesc) 
       this.editCategoryForm = new FormGroup({
         categoryId: new FormControl(this.categoryById.categoryId),
-        categoryName: new FormControl(this.categoryById.categoryName, [Validators.required, Validators.minLength(5)]),
+        categoryName: new FormControl(this.categoryById.categoryName, [Validators.required, Validators.minLength(4)]),
        categoryDesc: new FormControl(this.categoryById.categoryDesc, [Validators.required, Validators.minLength(10)]),
         oldcategoryLogo:new FormControl({value:this.categoryById.categoryLogo, disabled:true}),
        categoryLogo:new FormControl('',[Validators.required])

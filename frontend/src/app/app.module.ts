@@ -4,7 +4,6 @@ import {MatButtonModule} from '@angular/material/button';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ErrorComponent } from './error/error.component';
-import { UsermoduleModule } from './usermodule/usermodule.module';
 import { AdminModule } from './admin/admin.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -12,6 +11,7 @@ import { AuthinterceptorService } from './authinterceptor.service';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from './shared/shared.module';
 import { SafePipe } from './safe.pipe';
+import { MaterialModule } from './material/material.module';
 
 
 
@@ -24,13 +24,13 @@ import { SafePipe } from './safe.pipe';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    UsermoduleModule,
     AdminModule,
     HttpClientModule,
     ReactiveFormsModule,
     NoopAnimationsModule,
     MatButtonModule,
-   SharedModule
+   SharedModule,
+   MaterialModule
   ],
   providers: [
 
