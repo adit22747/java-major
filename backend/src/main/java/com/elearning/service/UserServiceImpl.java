@@ -155,6 +155,82 @@ import org.springframework.stereotype.Service;
 		}
 		
 		return false;
+}
+@Override
+public Feedback addFeedback(int uid, int cid, String feedback, int rating) {
+	Optional<User> userD = ur.findById(uid);
+	Optional<Course> courseD = cr.findById(cid);
+	boolean value = isCourseCompleted(cid, uid);
+	System.out.println(value);
+//	System.out.println(userD.get().getUserId());
+//	System.out.println(courseD.get().getCourseId());
+//	System.out.println(fr.findAllByUserAndCourse(userD.get(), courseD.get()).size());
+	if (fr.findAllByUserAndCourse(userD.get(), courseD.get()).size() == 0) {
+		if (value == true) {
+			Optional<Course> c = cr.findById(cid);
+			Optional<User> u = ur.findById(uid);
+			Feedback fb = new Feedback(feedback, c.get(), u.get(), rating);
+			// TODO Auto-generated method stub
+
+			return fr.save(fb);
+		}
+	} else {
+		System.out.println("do not add");
+	}
+//	if (fr.findAllByUserAndCourse(userD.get(), courseD.get()).size() == 1) {
+//		if(value == true) {
+//			Optional<Course> c = cr.findById(cid);
+//			Optional<User> u = ur.findById(uid);
+//			Feedback fb = new Feedback(feedback, c.get(), u.get());
+//			// TODO Auto-generated method stub
+//
+//			return fr.save(fb);
+//		}
+//	}
+
+	return null;
+}
+
+@Override
+public boolean isCourseCompleted(int cid, int uid) {
+	Optional<Course> c = cr.findById(cid);
+	Optional<User> u = ur.findById(uid);
+	EnrolledCourses ec = ecr.findByUserAndCourse(u.get(), c.get());
+	if(ec!=null) {
+		if (ec.getStartDate() != null & ec.getEndDate() != null) {
+			return true;
+	}
+	
+	}
+	return false;
+}
+
+@Override
+public boolean deleteFeedback(int feedbackid) {
+	fr.deleteById(feedbackid);
+	return true;
+}
+
+@Override
+public Feedback updateFeedback(int userid, int courseid, int feedbackid, String feedback_msg) {
+	Optional<User> userD = ur.findById(userid);
+
+	Optional<Course> courseD = cr.findById(courseid);
+	if (ecr.findAllByUserAndCourse(userD.get(), courseD.get()).size() == 1) {
+		Feedback feedback = new Feedback(feedbackid, feedback_msg);
+		feedback.setUser(userD.get());
+		feedback.setCourse(courseD.get());
+		return fr.save(feedback);
+	}
+	return null;
+}
+
+@Override
+public List<Feedback> fetchFeedbacks(int cid) {
+	Optional<Course> c = cr.findById(cid);
+	return fr.findAllByCourse(c.get());
+}
+}
 	
 
 	
